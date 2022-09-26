@@ -1,19 +1,32 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
-      const [email, setEmail] = useState("");
-      const [password, setPassword] = useState("");
-      const [isLogin, setisLogin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLogin, setisLogin] = useState(false);
+  const navigate = useNavigate();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      const handleSubmit = (e) => {
-        // prevent the form from refreshing the whole page
-        e.preventDefault();
-        // make a popup alert showing the "submitted" text
-        alert("Submited");
-      };
+    try {
+      const res = await axios.post("http://localhost:5000/api/loginUser", {
+        email: email,
+        password: password,
+      });
+
+      toast.success(
+        "User has been Logged in sucessfully, now you can edit your detail from profile page"
+      );
+      navigate("/profilePage");
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
 
   return (
     <Row>

@@ -23,4 +23,31 @@ router.post("/registeruser", async (req, res) => {
   }
 });
 
+router.post("/loginUser", async (req, res) => {
+  console.log(req.body);
+  const user = await User.findOne({
+    email: req.body.email,
+    password: req.body.password,
+  });
+
+  if (user) {
+    return res.json({ status: "ok", user: user });
+  } else {
+    return res.status(404).json({ status: "error", user: false });
+  }
+});
+
+// app.post("/api/login", async (req, res) => {
+//   const user = await User.findOne({
+//     email: req.body.email,
+//     password: req.body.password,
+//   });
+
+//   if (user) {
+//     return res.json({ status: "ok", user: token });
+//   } else {
+//     return res.json({ status: "error", user: false });
+//   }
+// });
+
 module.exports = router;

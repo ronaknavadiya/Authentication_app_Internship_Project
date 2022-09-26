@@ -27,18 +27,18 @@ mongoose.connect(
 
 app.use("/api/", userRoute);
 
-app.post("/api/login", async (req, res) => {
-  const user = await User.findOne({
-    email: req.body.email,
-    password: req.body.password,
-  });
+// app.post("/api/login", async (req, res) => {
+//   const user = await User.findOne({
+//     email: req.body.email,
+//     password: req.body.password,
+//   });
 
-  if (user) {
-    return res.json({ status: "ok", user: token });
-  } else {
-    return res.json({ status: "error", user: false });
-  }
-});
+//   if (user) {
+//     return res.json({ status: "ok", user: token });
+//   } else {
+//     return res.json({ status: "error", user: false });
+//   }
+// });
 
 app.listen(port, () => {
   console.log("Server started");
