@@ -34,7 +34,7 @@ const Login = () => {
         <h2>Login User</h2>
         <Form>
           <Form.Group controlId="email">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Email address </Form.Label>
             <Form.Control
               type="email"
               name="email"
