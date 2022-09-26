@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,16 @@ const Register = () => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [isRegister, setIsRegister] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let storageUser = localStorage.getItem("user");
+    storageUser = JSON.parse(storageUser);
+    console.log(storageUser);
+    if (storageUser != null) {
+      navigate("/profilePage");
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,11 +32,12 @@ const Register = () => {
         email: email,
         password: password,
       });
-
+      localStorage.setItem("user", JSON.stringify(res.data.user));
       toast.success(
         "User has been created sucessfully, now you can edit your detail from profile page"
       );
-      navigate("/profilePage")
+
+      navigate("/profilePage");
     } catch (error) {
       console.log("Error:", error);
     }

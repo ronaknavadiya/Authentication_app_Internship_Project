@@ -19,9 +19,11 @@ const Login = () => {
         password: password,
       });
 
+      localStorage.setItem("user", JSON.stringify(res.data.user));
       toast.success(
         "User has been Logged in sucessfully, now you can edit your detail from profile page"
       );
+
       navigate("/profilePage");
     } catch (error) {
       console.log("Error:", error);
