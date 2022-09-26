@@ -35,7 +35,7 @@ const ProfilePage = () => {
         "User has been created sucessfully, now you can edit your detail from profile page"
       );
     } catch (error) {
-      console.log(error);
+      console.log(error); 
     }
   };
 
